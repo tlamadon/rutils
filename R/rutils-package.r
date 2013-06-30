@@ -3,7 +3,7 @@
 #' @import data.table 
 #' @import digest
 #' @docType package
-#' @name mopt
+#' @name rutils
 #' @author Thibaut Lamadon \email{thibaut.lamadon@@gmail.com}
 #' @seealso rutils
 #' @references
