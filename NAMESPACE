@@ -1,0 +1,7 @@
+export(ddmergev)
+export(loop.ticker)
+export(renameany)
+export(spread)
+export(ticker)
+import(data.table)
+import(digest)

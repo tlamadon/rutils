@@ -1,0 +1,29 @@
+Package: mopt
+Type: Package
+Title: A package to run parallel estimation without derivative information
+Version: 0.1
+Date: 2013-02-14
+Author: Ran Gu, Thibaut Lamadon, FLorian Oswald
+Maintainer: Ran Gu <loinup@gmail.com>, Thibaut Lamadon
+    <thibaut.lamadon@gmail.com>, Florian Oswald <florian.oswald@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: MIT
+Depends:
+    R (>= 2.12.1),
+    digest,
+    plyr,
+    MASS,
+    reshape,
+    stringr,
+    ggplot2,
+    data.table,
+    parallel,
+    minqa,
+    MSBVAR
+LazyLoad: yes
+Collate:
+    'fun.mdata.r'
+    'inc.matlab.r'
+    'inc.stats.r'
+    'inc.utils.r'
+    'rutils-package.r'
