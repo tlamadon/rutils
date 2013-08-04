@@ -1,4 +1,41 @@
 
+
+
+# mean/sd of wage
+mv <- function(v,name) {
+  sfit1 = summary(lm(v ~1))
+  dev = abs(v - sfit1$coef[1,1])^2
+  sfit2 = summary(lm(dev ~1))
+  r = data.frame( moment = 'mean' , value=sfit1$coef[1,1],sd=sfit1$coef[1,2])
+  r = rbind(r,data.frame( moment = 'var' ,  value=sfit2$coef[1,1],sd=sfit2$coef[1,2]))
+  r$name=name
+  return(r)
+}
+
+#' Variance with standard error
+#'
+#' compute the variance and returns the standard error
+#' on the estimate. It the return value is a data.frame
+#' @param x vector fo which the variance needs to be computed
+#' @param y is optional, in case you want to compute covariance 
+#' @param att is the list of attributes to append to the results
+#' @export
+var.sd <- function(x,y=c(),att=list()) {
+  x = x - mean(x,na.rm=T)
+  if (length(y)==0) {
+    y = x
+  } else {
+    y = y - mean(y,na.rm=T)
+  }
+  sfit1 = summary(lm( x*y ~1))
+  att$moment = 'cov'
+  att$value  = sfit1$coef[1,1]
+  att$sd     = sfit1$coef[1,2]
+  att = data.frame(att)
+  return(att)
+}
+
+
 means <- function(x) {
   sfit = summary(lm(x~1))
   return(data.frame(mean=sfit$coef[1],sem=sfit$coef[2],pval=sfit$coef[4],sd=sd(x)))
