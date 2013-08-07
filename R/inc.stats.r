@@ -62,6 +62,12 @@ wt.cor <- function(x,y,w) {
  return(r$cor[2,1])
 }
 
+#' generates a Normal transition matrix using Gaussian copula
+#' @param rho correlation for Normal copula
+#' @param n dimensiosn of the matrix
+#' @param Qn support, has to be in [0,1] and with length n
+#' @param cond whether to return a conditional matrix
+#' @export
 getNormCop <- function(rho,n,Qn= seq(1/n,1-1/n,l=n),cond=FALSE) {
 
   require(copula)
