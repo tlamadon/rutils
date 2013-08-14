@@ -74,3 +74,44 @@ loop.ticker <- function(ticker,name) {
   ticker$last_pass = proc.time()[[3]]
   return(ticker)
 }
+
+#' puts several plots in the same figure
+#' @export
+multiplot <- function(..., plotlist=NULL, cols) {
+    require(grid)
+
+    # Make a list from the ... arguments and plotlist
+    plots <- c(list(...), plotlist)
+
+    numPlots = length(plots)
+
+    # Make the panel
+    plotCols = cols                       # Number of columns of plots
+    plotRows = ceiling(numPlots/plotCols) # Number of rows needed, calculated from # of cols
+
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(plotRows, plotCols)))
+    vplayout <- function(x, y)
+        viewport(layout.pos.row = x, layout.pos.col = y)
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+        curRow = ceiling(i/plotCols)
+        curCol = (i-1) %% plotCols + 1
+        print(plots[[i]], vp = vplayout(curRow, curCol ))
+    }
+
+}
+
+#' allows to recover the error once! just call recover_once() and the
+#' error will recover the context. The next time, the error is back to normal
+#' and the context is not recovered
+#' @export
+recover_once <- function() {
+  options(error=function() {
+    options(error=NULL)
+    recover()
+  })
+}
+

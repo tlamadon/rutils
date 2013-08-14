@@ -1,6 +1,8 @@
 export(ddmergev)
 export(getNormCop)
 export(loop.ticker)
+export(multiplot)
+export(recover_once)
 export(renameany)
 export(spread)
 export(ticker)
