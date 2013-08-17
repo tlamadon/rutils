@@ -9,13 +9,13 @@ Utilies for R. In particular check out `ddmergev` and `spread` which I tend to u
 
 ### Functions
 
- - `recover_once` set R in recover on error, but will do it only once.
- - `multiplot` allows to combine multiple plots into one plot
- - `renameany` will rename columns or string or factors within a data.frame
- - `dist` compute the norm realtive norm between two multidimensional arrays
- - `spread` allows to extend a multidimensional array in any dimension
- - `getNormCop`  generates a Normal transition matrix using Gaussian copula
- - `ddmergev`  merges 2 data.frame using a formula example of formula is `var1 + var2 | key1 + key2`
+ - `recover_once` sets R in recover on error, but will recover only first error.
+ - `multiplot` allows to combine multiple plots into one image.
+ - `renameany` renames columns or string or factors within a data.frame.
+ - `dist` computes the norm realtive norm between two multidimensional arrays.
+ - `spread` allows to extend a multidimensional array in any dimension.
+ - `getNormCop`  generates a Normal transition matrix using Gaussian copula.
+ - `ddmergev`  merges 2 data.frame using a formula example of formula is `var1 + var2 | key1 + key2`.
 
 ### Contributors
 
