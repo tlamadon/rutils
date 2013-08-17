@@ -9,17 +9,13 @@ Utilies for R. In particular check out `ddmergev` and `spread` which I tend to u
 
 ### Functions
 
-#### `recover_once`
-
-Don't you find it irritating to set `options(error=recover)` and then it keeps stopping until you set `options(error=NULL)`? The function `recover_once()` will set the option to recover once. Which is most of the time exactly what you want!
-
-#### `multiplot`
-
-Do you miss the matlab function `subplot` ? Well you don't have to anymore, this function allows you to create seperate plots and then combine then easily by calling:
-
-    multiplot(gp1,gp2,gp3,gp4,cols=2)
-
-The code was pretty much borrowed from the [R cookbook](http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/)
+ - `recover_once` set R in recover on error, but will do it only once.
+ - `multiplot` allows to combine multiple plots into one plot
+ - `renameany` will rename columns or string or factors within a data.frame
+ - `dist` compute the norm realtive norm between two multidimensional arrays
+ - `spread` allows to extend a multidimensional array in any dimension
+ - `getNormCop`  generates a Normal transition matrix using Gaussian copula
+ - `ddmergev`  merges 2 data.frame using a formula example of formula is `var1 + var2 | key1 + key2`
 
 ### Contributors
 
