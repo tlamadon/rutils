@@ -104,6 +104,15 @@ multiplot <- function(..., plotlist=NULL, cols) {
 
 }
 
+#' computes normalized distance between 2 vectors
+#' error will recover the context. The next time, the error is back to normal
+#' and the context is not recovered
+#' @export
+dist <- function(M1,M2,type=0) {
+  return( mean(  abs(M1-M2)) / mean(pmax(abs(M1),abs(M2))))
+}
+
+
 #' allows to recover the error once! just call recover_once() and the
 #' error will recover the context. The next time, the error is back to normal
 #' and the context is not recovered
