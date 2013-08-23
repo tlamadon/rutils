@@ -124,3 +124,22 @@ recover_once <- function() {
   })
 }
 
+parseSumDivide <- function(e) {
+
+  # if we have a symbole we attach it to both lists
+  if (is.symbol(e)) {
+    return( list(a=c(paste(e)),b=paste(e)))
+  }
+
+  # if we have a divide, we split it
+  if (e[[1]]==':') {
+    return( list(a=c(paste(e[[2]])),b=paste(e[[3]])))
+  }
+
+  # if we have a plus, we parse it, and append a and b
+  if (e[[1]]=='+') {
+    r1 = parseSumDivide(e[[2]])
+    r2 = parseSumDivide(e[[3]])
+    return(list(a = c(r1$a,r2$a) , b = c(r1$b,r2$b)))
+  }
+}
