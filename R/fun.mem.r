@@ -1,7 +1,7 @@
 #' gets all obejcts with their sizes 
 #' shamelessly copied from http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session
 #' @export
-showMemoryUse <- function(sort="size", decreasing=FALSE, limit) {
+showMemoryUse <- function(sort="size", decreasing=TRUE, limit) {
 
   objectList <- ls(parent.frame())
 
