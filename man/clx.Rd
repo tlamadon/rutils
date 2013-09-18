@@ -1,0 +1,30 @@
+\name{clx}
+\alias{clx}
+\title{Clustered Regression standard errors for one way clustering}
+\usage{
+  clx(fm, dfcw, cluster)
+}
+\arguments{
+  \item{fm}{fitted model}
+
+  \item{fdcw}{degree of freedom correction weights. set 1
+  if none required.}
+
+  \item{cluster}{name of clustering variable}
+}
+\value{
+  a coeftest object
+}
+\description{
+  Clustered standard errors similar to
+  \link{http://www.stata.com/help.cgi?vce_option} I
+  installed a vignette in /inst. Contacted the author
+  whether he would work on a package himself, said no.
+  Copyright Mahmood Arai, Jan 26, 2008. Here's a vignette:
+  \url{http://people.su.se/~ma/clustering.pdf}. Caution:
+  not properly tested.
+}
+\author{
+  Mahmood Arai <mahmood.arai@ne.su.se>
+}
+

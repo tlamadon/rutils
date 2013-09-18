@@ -3,6 +3,9 @@ Type: Package
 Title: Some utility functions
 Version: 0.1
 Date: 2013-02-14
+Authors@R: c(person("Thibaut", "Lamadon", email = "thibaut.lamadon@gmail.com",
+    role = c("aut", "cre")), person("Florian", "Oswald", email =
+    "florian.oswald@gmail.com",role = "ctb"))
 Author: Thibaut Lamadon
 Maintainer: Thibaut Lamadon <thibaut.lamadon@gmail.com>
 Description: More about what it does (maybe more than one line)
@@ -14,7 +17,9 @@ Depends:
     reshape,
     stringr,
     ggplot2,
-    MSBVAR
+    MSBVAR,
+    sandwich,
+    lmtest
 LazyLoad: yes
 Collate:
     'fun.mdata.r'
