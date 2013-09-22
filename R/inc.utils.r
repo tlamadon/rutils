@@ -252,6 +252,11 @@ nonlinear.map <- function(z,low,high,type){
 #' @param n number of points to use in approximation
 #' @return list with Pmat (transition matrix) and zgrid (grid points)
 #' @export
+#' @examples
+#' R <- rouwenhorst(rho=0.9,sigma=1.1,mu=0,n=5)
+#' print(R$zgrid)	# support points
+#' print(R$Pmat)	# transition matrix
+#' print(rowSums(R$Pmat))
 rouwenhorst <- function(rho,sigma,mu=0,n){
 	stopifnot(n>1)
 	qu <- (rho+1)/2
