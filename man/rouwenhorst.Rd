@@ -21,6 +21,12 @@
   translation of
   \url{http://www.karenkopecky.net/rouwenhorst.m}
 }
+\examples{
+R <- rouwenhorst(rho=0.9,sigma=1.1,mu=0,n=5)
+print(R$zgrid)	# support points
+print(R$Pmat)	# transition matrix
+print(rowSums(R$Pmat))
+}
 \references{
   \url{http://www.karenkopecky.net/RouwenhorstPaperFinal.pdf}
 }

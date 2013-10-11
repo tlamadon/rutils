@@ -1,0 +1,21 @@
+\name{knot.select.old}
+\alias{knot.select.old}
+\title{spline knot allocator for square basis functions}
+\usage{
+  knot.select.old(degree, grid)
+}
+\arguments{
+  \item{degree}{degree of spline}
+
+  \item{grid}{vector of grid points}
+}
+\value{
+  spline knot vector
+}
+\description{
+  allocates a vector of spline knots placed according to
+  deBoors average rule such that the resulting matrix of
+  basis functions is square: num of data points equals num
+  of basis functions.
+}
+

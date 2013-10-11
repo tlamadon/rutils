@@ -252,6 +252,11 @@ nonlinear.map <- function(z,low,high,type){
 #' @param n number of points to use in approximation
 #' @return list with Pmat (transition matrix) and zgrid (grid points)
 #' @export
+#' @examples
+#' R <- rouwenhorst(rho=0.9,sigma=1.1,mu=0,n=5)
+#' print(R$zgrid)	# support points
+#' print(R$Pmat)	# transition matrix
+#' print(rowSums(R$Pmat))
 rouwenhorst <- function(rho,sigma,mu=0,n){
 	stopifnot(n>1)
 	qu <- (rho+1)/2
@@ -307,3 +312,30 @@ sim.markov.paths <- function(n,ntime,trans,init=NULL){
 	return(out)
 }
 
+
+#' spline knot allocator for square basis functions
+#'
+#' allocates a vector of spline knots placed according to
+#' deBoors average rule such that the resulting matrix of
+#' basis functions is square: num of data points equals num
+#' of basis functions.
+#' @param degree degree of spline
+#' @param grid vector of grid points
+#' @return spline knot vector
+knot.select.old <- function(degree,grid){
+# returns a knotvector for a grid of data sites and a spline degree
+	grid <- grid[order(grid)]
+    n <- length(grid)
+    # if (n<(degree+1)*2+1) stop("need at least 2*(degree+1) +1 grid points")
+    p <- n+degree+1     # number of nodes required for solving Ax=b exactly
+    knots <- rep(0,p)
+    knots <- replace(knots,1:(degree+1),rep(grid[1],degree+1))
+    knots <- replace(knots,(p-degree):p,rep(tail(grid,1),degree+1))
+# this puts multiplicity of first and last knot in order
+# if there are anough gridpoints, compute intermediate ones
+    if (n<(degree+1)) stop("to few grid points for clamped curve")
+    if (n>(degree+1)){
+        for (j in 2:(n-degree)) knots[j+degree] <- mean(grid[j:(j+degree-1)])
+    }
+    return(knots)
+}
