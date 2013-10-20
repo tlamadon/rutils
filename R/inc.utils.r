@@ -27,7 +27,7 @@ ddmergev <- function(data1,data2,form,verbose=FALSE) {
     I <- which(nn==rename_rule$b[[i]])
     if  (length(I)>0) {
       nn[I] <- rename_rule$a[[i]]
-      cat(paste('renaming in data2 ',nn[I],'->', rename_rule$a[[i]]))
+      if (verbose) cat(paste('renaming in data2 ',nn[I],'->', rename_rule$a[[i]]));
     }
   }
   names(data2) <- nn
