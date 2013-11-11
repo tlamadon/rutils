@@ -1,0 +1,17 @@
+\name{gnuplot}
+\alias{gnuplot}
+\title{creates a gnuplot object}
+\usage{
+  gnuplot()
+}
+\description{
+  creates a gnuplot object
+}
+\examples{
+gnp <- gnuplot()
+X = spread(seq(0,1,l=20),2,20)
+Y = spread(seq(0,1,l=20),1,20)
+gnp + gp_mesh(X*Y)
+close(gnp)
+}
+

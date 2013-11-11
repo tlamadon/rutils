@@ -28,3 +28,4 @@ Collate:
     'inc.utils.r'
     'rutils-package.r'
     'fun.mem.r'
+    'fun.gnuplot.r'
