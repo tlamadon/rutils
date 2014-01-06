@@ -19,7 +19,8 @@ Depends:
     ggplot2,
     MSBVAR,
     sandwich,
-    lmtest
+    lmtest,
+    copula
 LazyLoad: yes
 Collate:
     'fun.mdata.r'

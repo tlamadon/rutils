@@ -70,7 +70,6 @@ wt.cor <- function(x,y,w) {
 #' @export
 getNormCop <- function(rho,n,Qn= seq(1/n,1-1/n,l=n),cond=FALSE) {
 
-  require(copula)
   cop = normalCopula(rho) 
 
   #create the grid
