@@ -14,7 +14,7 @@ Depends:
     R (>= 2.12.1),
     digest,
     plyr,
-    reshape,
+    reshape2,
     stringr,
     ggplot2,
     MSBVAR,
