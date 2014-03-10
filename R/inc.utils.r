@@ -388,3 +388,99 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     }
   }
 }
+
+
+
+#' Compute Coefficients of Kronecker product approximation
+#'
+#' computes b = kron(matrixd,kron(...,(kron(matrix2,matrix1))...))*y
+#'
+#' Given a function f(x1,x2,...,xd), computes the approximating
+#' coefficient vector b in
+#' fhat(x1,x2,...,xd) = b * B(x1,x2,...xd)
+#' where B() is the tensor product of all d univariate 
+#' basis functions. Those basis functions can be anything
+#' i.e. splines or polynomials etc. Main restriction:
+#' the basis functions MUST be square. For the splines,
+#' means that you have to choose as many evaluation points
+#' as you choose basis functions.
+#' @param y numeric vector with function values ordered in the right way.
+#' first index should go fastest.
+#' @param matrices a list of SQUARE basis functions. one basis function per
+#' dimension.
+#' @return vector of approximating coefficients.
+#' @examples
+#' n1 <- 2
+#' n2 <- 3
+#' n3 <- 3
+#' m1 <- matrix(rnorm(n1^2),nrow=n1,ncol=n1)
+#' m2 <- matrix(rnorm(n2^2),nrow=n2,ncol=n2)
+#' m3 <- matrix(rnorm(n3^2),nrow=n3,ncol=n3)
+#' xvals <- expand.grid(m1[,1],m2[,1],m3[,1])
+#' func <- function( x ) {
+#' 	return( x[1] + x[2] + x[3] + x[1]*x[2] * x[3] )
+#' }
+#'
+#' ## these are the function values
+#' y <- apply(xvals,1,func)
+#'
+#' ## build tensor product matrix
+#' kron      <- kronecker(m3,kronecker(m2,m1))
+#'
+#' ## notice: in kron the indexing corresponds to this:
+#' ## uncomment to see
+#' ##expand.grid( fastest=1:nrow(m1), middle=1:nrow(m2), slowest=1:nrow(m3) )
+#'
+#' ## do multiplication
+#' ## that is the standard way
+#' R.kron <- kron %*% y
+#'
+#' ##do kron.prod
+#' ##that's the deBoer Algo
+#' my.kron <- kron.prod(y,list(m1,m2,m3))
+#'
+#' all.equal(as.numeric(R.kron),my.kron)  #TRUE
+kron.prod <- function(y,matrices){
+	# INPUT
+	# matrices: list(matrix1, matrix2,..., matrixd)
+	# 			where dim(matrixj) = c(nj,nj) [SQUARE!]
+	# y: value vector 
+	# 	 with length(y) = n1*...*nd
+	#
+	# OUTPUT
+	# y1: kron(matrixd,kron(...,(kron(matrix2,matrix1))...))*y
+	#
+	# check user input
+	stopifnot(is.list(matrices))
+	# stop if not all of them are square
+	allsquare <- lapply(matrices,function(x){dim(x)[1]==dim(x)[2]})
+	stopifnot(all(unlist(allsquare)))
+	# get sizes
+	nmatrices <- length(matrices)
+	nall <- length(y)
+	nullvec   <- rep(0,nall)
+	# compute product for first matrix
+	y0    <- y
+	stemp <- matrices[[1]]
+	n     <- dim(stemp)[1]
+	m     <- nall/n
+	y1    <- nullvec
+	for (i in 1:m){
+		y1[m*(0:(n-1)) + i]  <- stemp %*% y0[(n*(i-1)) + (1:n)]
+	}
+	if (nmatrices > 1){
+		# for all other matrices
+		for(imat in 2:nmatrices){
+			y0    <- y1
+			stemp <- matrices[[imat]]
+			n     <- dim(stemp)[1]
+			m     <- nall/n
+			y1    <- nullvec
+			for (i in 1:m){
+				y1[m*(0:(n-1)) + i]  <- stemp %*% y0[(n*(i-1)) + (1:n)]
+			}
+		}
+	}
+	return(y1)
+}
+

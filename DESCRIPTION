@@ -10,6 +10,8 @@ Author: Thibaut Lamadon
 Maintainer: Thibaut Lamadon <thibaut.lamadon@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: MIT
+Imports:
+    testthat
 Depends:
     R (>= 2.12.1),
     digest,
