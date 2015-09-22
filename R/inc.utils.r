@@ -484,3 +484,54 @@ kron.prod <- function(y,matrices){
 	return(y1)
 }
 
+
+#' simple function to change dimension
+#' @export
+rdim <- function(A,...) {
+  dd <- list(...); 
+  if (length(dd)==1) {
+    dim(A)<-dd[[1]]
+  } else {
+    dim(A) <- dd
+  }
+  return(A)
+}
+
+#' combine cat and sprintf
+#' @export
+catf <- function(...) cat(sprintf(...))
+
+#' easier tic
+#' @export
+#' @examples
+#' tic = tic.new()
+#' tic.toc("toto1")
+#' tic.toc("toto2")
+#' tic.toc("toto1")
+#' tic.toc()
+tic.new <- function() {
+  t = Sys.time()
+  tt = list(all.start=t,last.time=t,loop=0,timers=list())
+  
+  tic.toc <- function(name="") {
+    t = Sys.time()
+    if (name=="") {
+      return(tt)
+    }
+    
+    if (name %in% names(tt$timers)) {
+      tm = tt$timers[[name]]
+      tm$count = tm$count+1
+      tm$total = tm$total + t - tt$last.time    
+      tt$timers[[name]] = tm
+    } else {
+      tm = list(count=1,total=t - tt$last.time)
+      tt$timers[[name]] = tm
+    }
+    tt$last.time=t;
+    tt <<- tt
+  }
+  
+  return(tic.toc)
+}
+
